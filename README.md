@@ -1,2 +1,2 @@
 # crud-hibernate
-# DAO techniques: Hibernate
+# DAO technique: Hibernate
