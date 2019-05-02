@@ -1,5 +1,8 @@
 package org.academiadecodigo.bootcamp.crudhibernate.controller.rest;
 
+import org.academiadecodigo.bootcamp.crudhibernate.dto.EmployeeDTOToEmployee;
+import org.academiadecodigo.bootcamp.crudhibernate.dto.EmployeeDto;
+import org.academiadecodigo.bootcamp.crudhibernate.dto.EmployeeToEmployeeDTO;
 import org.academiadecodigo.bootcamp.crudhibernate.entity.Employee;
 import org.academiadecodigo.bootcamp.crudhibernate.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController //Annotating a class with @RestController is the same as annotating it with both @Controller and @ResponseBody
@@ -14,6 +18,8 @@ import java.util.List;
 public class EmployeeRestController {
 
     private EmployeeService employeeService;
+    private EmployeeDTOToEmployee employeeDTOToEmployee;
+    private EmployeeToEmployeeDTO employeeToEmployeeDTO;
 
     //set up constructor injection
         // constructor injection (automatically created by spring boot)
@@ -22,10 +28,28 @@ public class EmployeeRestController {
         this.employeeService = employeeService;
     }
 
+    @Autowired
+    public void setEmployeeDTOToEmployee(EmployeeDTOToEmployee employeeDTOToEmployee) {
+        this.employeeDTOToEmployee = employeeDTOToEmployee;
+    }
+
+    @Autowired
+    public void setEmployeeToEmployeeDTO(EmployeeToEmployeeDTO employeeToEmployeeDTO) {
+        this.employeeToEmployeeDTO = employeeToEmployeeDTO;
+    }
+
     //expose "/employees" and return list of employees
     @GetMapping("/employees")
-    public List<Employee> findAll() {
-        return employeeService.findAll();
+    public ResponseEntity<List<EmployeeDto>> findAll() {
+
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+
+        for(Employee employee : employeeService.findAll()) {
+            employeeDtos.add(employeeToEmployeeDTO.convert(employee));
+        }
+
+        return new ResponseEntity<>(employeeDtos, HttpStatus.OK);
+        //return employeeService.findAll();
     }
 
     /**
@@ -37,39 +61,41 @@ public class EmployeeRestController {
      * It is used to return a specific http status code from the controller.
      */
     @GetMapping("/employee/{id}")
-    public ResponseEntity<Employee> getEmployee(@PathVariable Integer id) {
+    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable Integer id) {
 
         Employee employee = employeeService.findById(id);
         if (employee == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+        return new ResponseEntity<>(employeeToEmployeeDTO.convert(employee), HttpStatus.OK);
     }
 
     //@PathVariable annotation can be used on a controller method argument to bind it to the value of a URI template variable:
     //@RequestBody can be used in a controller to implement smart object serialization and deserialization
     @PostMapping("/employee")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+    public ResponseEntity<EmployeeDto> addEmployee(@RequestBody EmployeeDto employeeDto) {
 
-        employee.setId(0);
-        employeeService.save(employee);
+        if(employeeDto.getId() != null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        employeeService.save(employeeDTOToEmployee.convert(employeeDto));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("employee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee, @PathVariable Integer id) {
+    public ResponseEntity<EmployeeDto> updateEmployee(@RequestBody EmployeeDto employeeDto, @PathVariable Integer id) {
 
-        employee.setId(id);
-        employeeService.save(employee);
+        employeeDto.setId(id);
+        employeeService.save(employeeDTOToEmployee.convert(employeeDto));
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("employee/{id}")
-    public ResponseEntity<Employee> deleteEmployeeById(@PathVariable Integer id) {
+    public ResponseEntity<EmployeeDto> deleteEmployeeById(@PathVariable Integer id) {
 
         try {
             employeeService.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         catch (Exception ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
