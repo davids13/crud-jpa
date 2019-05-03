@@ -1,8 +1,9 @@
-package org.academiadecodigo.bootcamp.crudhibernate.service;
+package org.academiadecodigo.bootcamp.crudJpa.service;
 
-import org.academiadecodigo.bootcamp.crudhibernate.dao.EmployeeDAO;
-import org.academiadecodigo.bootcamp.crudhibernate.entity.Employee;
+import org.academiadecodigo.bootcamp.crudJpa.dao.EmployeeDAO;
+import org.academiadecodigo.bootcamp.crudJpa.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,7 @@ import java.util.List;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
+    @Qualifier("employeeDAOJPAImpl") //says what´s bean to use, and we pass the bean id
     private EmployeeDAO employeeDAO;
 
     @Override

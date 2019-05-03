@@ -1,7 +1,7 @@
-package org.academiadecodigo.bootcamp.crudhibernate.dto;
+package org.academiadecodigo.bootcamp.crudJpa.dto;
 
-import org.academiadecodigo.bootcamp.crudhibernate.entity.Employee;
-import org.academiadecodigo.bootcamp.crudhibernate.service.EmployeeService;
+import org.academiadecodigo.bootcamp.crudJpa.entity.Employee;
+import org.academiadecodigo.bootcamp.crudJpa.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

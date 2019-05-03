@@ -1,13 +1,13 @@
-package org.academiadecodigo.bootcamp.crudhibernate;
+package org.academiadecodigo.bootcamp.crudJpa;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CrudHibernateApplication {
+public class CrudJpaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CrudHibernateApplication.class, args);
+		SpringApplication.run(CrudJpaApplication.class, args);
 	}
 
 }

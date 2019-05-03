@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp.crudhibernate.dto;
+package org.academiadecodigo.bootcamp.crudJpa.dto;
 
 public class EmployeeDto {
 

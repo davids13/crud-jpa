@@ -1,4 +1,4 @@
-package org.academiadecodigo.bootcamp.crudhibernate.entity;
+package org.academiadecodigo.bootcamp.crudJpa.entity;
 
 import javax.persistence.*;
 

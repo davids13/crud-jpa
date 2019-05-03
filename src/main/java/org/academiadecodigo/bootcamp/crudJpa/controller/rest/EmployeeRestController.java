@@ -1,10 +1,10 @@
-package org.academiadecodigo.bootcamp.crudhibernate.controller.rest;
+package org.academiadecodigo.bootcamp.crudJpa.controller.rest;
 
-import org.academiadecodigo.bootcamp.crudhibernate.dto.EmployeeDTOToEmployee;
-import org.academiadecodigo.bootcamp.crudhibernate.dto.EmployeeDto;
-import org.academiadecodigo.bootcamp.crudhibernate.dto.EmployeeToEmployeeDTO;
-import org.academiadecodigo.bootcamp.crudhibernate.entity.Employee;
-import org.academiadecodigo.bootcamp.crudhibernate.service.EmployeeService;
+import org.academiadecodigo.bootcamp.crudJpa.dto.EmployeeDTOToEmployee;
+import org.academiadecodigo.bootcamp.crudJpa.dto.EmployeeDto;
+import org.academiadecodigo.bootcamp.crudJpa.dto.EmployeeToEmployeeDTO;
+import org.academiadecodigo.bootcamp.crudJpa.entity.Employee;
+import org.academiadecodigo.bootcamp.crudJpa.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

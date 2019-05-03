@@ -1,6 +1,6 @@
-package org.academiadecodigo.bootcamp.crudhibernate.dao;
+package org.academiadecodigo.bootcamp.crudJpa.dao;
 
-import org.academiadecodigo.bootcamp.crudhibernate.entity.Employee;
+import org.academiadecodigo.bootcamp.crudJpa.entity.Employee;
 
 import java.util.List;
 

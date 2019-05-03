@@ -1,11 +1,10 @@
-package org.academiadecodigo.bootcamp.crudhibernate.dao;
+package org.academiadecodigo.bootcamp.crudJpa.dao;
 
-import org.academiadecodigo.bootcamp.crudhibernate.entity.Employee;
+import org.academiadecodigo.bootcamp.crudJpa.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -28,14 +27,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
         //get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
-
         //create a query
         //using native Hibernate API
         Query<Employee> query = currentSession.createQuery("FROM Employee", Employee.class);
-
         //execute query and get result list
         List<Employee> employees = query.getResultList();
-
         //return the results
         return employees;
     }

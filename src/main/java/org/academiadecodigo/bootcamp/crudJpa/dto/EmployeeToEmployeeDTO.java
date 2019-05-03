@@ -1,6 +1,6 @@
-package org.academiadecodigo.bootcamp.crudhibernate.dto;
+package org.academiadecodigo.bootcamp.crudJpa.dto;
 
-import org.academiadecodigo.bootcamp.crudhibernate.entity.Employee;
+import org.academiadecodigo.bootcamp.crudJpa.entity.Employee;
 import org.springframework.stereotype.Component;
 
 @Component
